@@ -1,0 +1,16 @@
+//
+//  MusicPrefix.pch
+//  MusicSearch
+//
+//  Created by Yadav, Manish on 2/4/17.
+//  Copyright © 2017 Yadav, Manish. All rights reserved.
+//
+
+#ifndef MusicPrefix_pch
+#define MusicPrefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import "APIConstants.h"
+#import "Utility.h"
+#endif /* MusicPrefix_pch */
