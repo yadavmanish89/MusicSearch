@@ -13,6 +13,7 @@
 		D349DE8E1E46483D00D20426 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D349DE8C1E46483D00D20426 /* LaunchScreen.storyboard */; };
 		D349DEA11E465D6400D20426 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D349DE9D1E465D6400D20426 /* AppDelegate.m */; };
 		D349DEA21E465D6400D20426 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D349DEA01E465D6400D20426 /* ViewController.m */; };
+		D37E5D951E466834006D9268 /* SongTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D37E5D941E466834006D9268 /* SongTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		D349DE9D1E465D6400D20426 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D349DE9F1E465D6400D20426 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		D349DEA01E465D6400D20426 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D37E5D931E466834006D9268 /* SongTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongTableViewCell.h; sourceTree = "<group>"; };
+		D37E5D941E466834006D9268 /* SongTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +94,8 @@
 			children = (
 				D349DE9F1E465D6400D20426 /* ViewController.h */,
 				D349DEA01E465D6400D20426 /* ViewController.m */,
+				D37E5D931E466834006D9268 /* SongTableViewCell.h */,
+				D37E5D941E466834006D9268 /* SongTableViewCell.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -166,6 +171,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D37E5D951E466834006D9268 /* SongTableViewCell.m in Sources */,
 				D349DEA21E465D6400D20426 /* ViewController.m in Sources */,
 				D349DEA11E465D6400D20426 /* AppDelegate.m in Sources */,
 				D349DE801E46483C00D20426 /* main.m in Sources */,
