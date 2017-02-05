@@ -17,12 +17,22 @@
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *dataSource;
+@property (strong, nonatomic) UIActivityIndicatorView *indicator;
 @end
 
 @implementation ViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initLoader];
     [self loadLastSearch];
+}
+
+-(void)initLoader{
+    self.indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.indicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+    self.indicator.center = self.view.center;
+    [self.view addSubview:self.indicator];
+    [self.indicator bringSubviewToFront:self.view];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
@@ -30,8 +40,8 @@
 }
 
 -(void)loadLastSearch{
-    NSString *lastSearch = [[NSUserDefaults standardUserDefaults] objectForKey:@"last"];
-    if(!lastSearch){
+    NSString *lastSearch = [[NSUserDefaults standardUserDefaults] objectForKey:LAST_SEARCH_KEY];
+    if(!lastSearch.length){
         lastSearch = @"ABC";
     }
     [self getSongDataForText:lastSearch];
@@ -39,9 +49,6 @@
 
 #pragma mark SearchBar Delegate
 -(BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    UIWindow *window = [[UIApplication sharedApplication]keyWindow];
-    [window setBackgroundColor:[UIColor redColor]];
-
     NSCharacterSet *alphaNumericSet = [NSCharacterSet alphanumericCharacterSet];
     if([text rangeOfCharacterFromSet:alphaNumericSet].location != NSNotFound || [text isEqualToString:@""]){
         return YES;
@@ -55,13 +62,17 @@
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     if(searchBar.text.length>MIN_CHAR-1){
-        [self getSongDataForText:searchBar.text];
+        [self performSelector:@selector(getSongDataForText:) withObject:searchBar.text afterDelay:2.0];
     }
 }
 
 #pragma mark API Call
+
 -(void)getSongDataForText:(NSString*)searchText{
-    APIManager *manager = [APIManager new];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    [self.indicator startAnimating];
+    APIManager *manager = [[APIManager alloc] init];
     [manager getDataFromURL:URL_SEARCH withParameters:@{@"search":searchText} completionBlock:^(id response) {
         if([response isKindOfClass:[NSError class]]){
             [self showAlert];
@@ -75,7 +86,7 @@
                     NSArray *results = [responseDict objectForKey:@"results"];
                     [self parseResponseWithArray:results];
                     [self.tableView reloadData];
-                    [[NSUserDefaults standardUserDefaults] setObject:self.searchBar.text forKey:LAST_SEARCH_KEY];
+                    [[NSUserDefaults standardUserDefaults] setObject:self.searchBar.text forKey:LAST_SEARCH_KEY];  // storing locally for next time launch
                     [[NSUserDefaults standardUserDefaults] synchronize];
                 }
                 else{
@@ -83,6 +94,8 @@
                 }
             }
         }
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        [self.indicator stopAnimating];
     }];
 }
 
