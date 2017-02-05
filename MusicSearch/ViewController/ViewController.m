@@ -22,7 +22,7 @@
 @implementation ViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    [self loadLastSearch];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
@@ -31,11 +31,13 @@
 
 -(void)loadLastSearch{
     NSString *lastSearch = [[NSUserDefaults standardUserDefaults] objectForKey:@"last"];
-    if(lastSearch){
-        [self getSongDataForText:lastSearch];
+    if(!lastSearch){
+        lastSearch = @"ABC";
     }
+    [self getSongDataForText:lastSearch];
 }
 
+#pragma mark SearchBar Delegate
 -(BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
     UIWindow *window = [[UIApplication sharedApplication]keyWindow];
     [window setBackgroundColor:[UIColor redColor]];
@@ -57,6 +59,7 @@
     }
 }
 
+#pragma mark API Call
 -(void)getSongDataForText:(NSString*)searchText{
     APIManager *manager = [APIManager new];
     [manager getDataFromURL:URL_SEARCH withParameters:@{@"search":searchText} completionBlock:^(id response) {
@@ -72,6 +75,8 @@
                     NSArray *results = [responseDict objectForKey:@"results"];
                     [self parseResponseWithArray:results];
                     [self.tableView reloadData];
+                    [[NSUserDefaults standardUserDefaults] setObject:self.searchBar.text forKey:LAST_SEARCH_KEY];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
                 }
                 else{
                    // [self showAlert];
@@ -100,6 +105,7 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+#pragma mark TableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataSource.count;
 }

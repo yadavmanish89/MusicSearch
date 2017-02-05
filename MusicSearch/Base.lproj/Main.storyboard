@@ -24,12 +24,12 @@
                         <subviews>
                             <searchBar contentMode="redraw" barStyle="black" searchBarStyle="prominent" translatesAutoresizingMaskIntoConstraints="NO" id="zhL-EH-VI6">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="iQc-ku-ydE"/>
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="barTintColor" red="0.18823529411764706" green="0.12549019607843137" blue="0.074509803921568626" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.11764705882352941" green="0.12941176470588234" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="q4p-zq-IDn"/>
@@ -37,7 +37,7 @@
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="55" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VeT-qF-SqA">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.17254901960784313" green="0.18431372549019609" blue="0.20784313725490194" alpha="0.48672945205479451" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -62,7 +62,7 @@
                                                     <rect key="frame" x="10" y="35" width="200" height="15"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
-                                                    <color key="textColor" red="0.31372549019607843" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.32549019607843138" green="0.33725490196078434" blue="0.36078431372549019" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NgX-Fv-a5R">
@@ -97,7 +97,7 @@
                                                 <constraint firstItem="HMa-wV-uxQ" firstAttribute="centerY" secondItem="l8B-We-Fti" secondAttribute="centerY" id="rex-1s-MMo"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.20681912448200479" green="0.14036161534108896" blue="0.079787938105201697" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.17254901960784313" green="0.18431372549019609" blue="0.20784313725490194" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="artistLabel" destination="8vi-g6-chY" id="XSc-fV-HlV"/>
                                             <outlet property="priceLabel" destination="HMa-wV-uxQ" id="fUP-SK-9DY"/>
@@ -111,7 +111,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.18823529411764706" green="0.12549019607843137" blue="0.074509803921568626" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.11764705882352941" green="0.12941176470588234" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="zhL-EH-VI6" secondAttribute="trailing" id="10f-zS-Qd4"/>
                             <constraint firstItem="zhL-EH-VI6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="6CV-q3-phr"/>
