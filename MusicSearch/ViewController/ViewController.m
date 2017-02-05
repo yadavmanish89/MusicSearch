@@ -25,6 +25,7 @@
     [super viewDidLoad];
     [self initLoader];
     [self loadLastSearch];
+    [self.navigationController.navigationBar setHidden:YES];
 }
 
 -(void)initLoader{
@@ -100,8 +101,12 @@
 }
 
 -(void)parseResponseWithArray:(NSArray*)response{
-    self.dataSource = nil;
-    self.dataSource = [[NSMutableArray alloc] init];
+    if(self.dataSource){
+        [self.dataSource removeAllObjects];
+    }
+    else{
+        self.dataSource = [[NSMutableArray alloc] init];
+    }
     for (NSDictionary *dict in response) {
         TrackModel *model = [[TrackModel alloc]initWithDictionary:dict];
         [self.dataSource addObject:model];
@@ -127,6 +132,10 @@
     TrackTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:TRACK_CELL_IDENTIFIER];
     cell.data = [self.dataSource objectAtIndex:indexPath.row];
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
 }
 
 - (void)didReceiveMemoryWarning {
