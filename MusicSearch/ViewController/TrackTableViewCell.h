@@ -1,5 +1,5 @@
 //
-//  SongTableViewCell.h
+//  TrackTableViewCell.h
 //  MusicSearch
 //
 //  Created by Yadav, Manish on 2/4/17.
@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface SongTableViewCell : UITableViewCell
-@property (strong, nonatomic) IBOutlet UILabel *artistLabel;
+#import "TrackModel.h"
+@interface TrackTableViewCell : UITableViewCell
+@property (nonatomic, strong) TrackModel *data;
 
 @end

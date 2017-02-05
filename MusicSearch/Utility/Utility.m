@@ -15,4 +15,12 @@
     };
     return NO;
 }
+
++(NSString *)replaceNullStringWithNil:(id)object{
+    if([object isKindOfClass:[NSNull class]]){
+        return nil;
+    }
+    return object;
+}
+
 @end

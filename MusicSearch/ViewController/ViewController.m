@@ -7,18 +7,48 @@
 //
 
 #import "ViewController.h"
-#import "SongTableViewCell.h"
+#import "TrackTableViewCell.h"
 #import "APIManager.h"
 
 #define MIN_CHAR 3
+#define TRACK_CELL_IDENTIFIER @"TrackCell"
+#define LAST_SEARCH_KEY @"lastSearch"
 @interface ViewController () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
+@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSMutableArray *dataSource;
 @end
 
 @implementation ViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
+
+-(void)loadLastSearch{
+    NSString *lastSearch = [[NSUserDefaults standardUserDefaults] objectForKey:@"last"];
+    if(lastSearch){
+        [self getSongDataForText:lastSearch];
+    }
+}
+
+-(BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    UIWindow *window = [[UIApplication sharedApplication]keyWindow];
+    [window setBackgroundColor:[UIColor redColor]];
+
+    NSCharacterSet *alphaNumericSet = [NSCharacterSet alphanumericCharacterSet];
+    if([text rangeOfCharacterFromSet:alphaNumericSet].location != NSNotFound || [text isEqualToString:@""]){
+        return YES;
+    }
+    NSString *lastCharStr = [searchBar.text substringWithRange:NSMakeRange(range.location-1, 1)];
+    if([text isEqualToString:@" "] && ![lastCharStr isEqualToString:@" "]){
+        return YES;
+    }
+    return NO;
 }
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
@@ -38,12 +68,26 @@
             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options: NSJSONReadingAllowFragments error:&error];
             if([Utility isValidDictionary:responseDict]){
                 NSInteger resultCount = [[responseDict objectForKey:@"resultCount"] integerValue];
-                if(resultCount == 0){
-                    [self showAlert];
+                if(resultCount){
+                    NSArray *results = [responseDict objectForKey:@"results"];
+                    [self parseResponseWithArray:results];
+                    [self.tableView reloadData];
+                }
+                else{
+                   // [self showAlert];
                 }
             }
         }
     }];
+}
+
+-(void)parseResponseWithArray:(NSArray*)response{
+    self.dataSource = nil;
+    self.dataSource = [[NSMutableArray alloc] init];
+    for (NSDictionary *dict in response) {
+        TrackModel *model = [[TrackModel alloc]initWithDictionary:dict];
+        [self.dataSource addObject:model];
+    }
 }
 
 -(void)showAlert{
@@ -57,12 +101,12 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return self.dataSource.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    SongTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"songCell"];
-    [cell.artistLabel setText:@"hi"];
+    TrackTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:TRACK_CELL_IDENTIFIER];
+    cell.data = [self.dataSource objectAtIndex:indexPath.row];
     return cell;
 }
 

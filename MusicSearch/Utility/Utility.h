@@ -10,4 +10,5 @@
 
 @interface Utility : NSObject
 +(BOOL)isValidDictionary:(id)object;
++(NSString*)replaceNullStringWithNil:(id)object;
 @end
