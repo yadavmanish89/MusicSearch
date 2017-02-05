@@ -24,12 +24,7 @@
     _data = data;
     [self.trackLabel setText:data.trackName];
     [self.artistLabel setText:data.artistName];
-    NSString *trackPrice = [NSString stringWithFormat:@"%0.2f",data.trackPrice];
-    if([data.currency caseInsensitiveCompare:@"usd"] == NSOrderedSame){
-        trackPrice = [NSString stringWithFormat:@"$%0.2f",data.trackPrice];
-    }
-    [self.priceLabel setText:trackPrice];
-
+    [self.priceLabel setText:[NSString stringWithFormat:@"$%0.2f",data.trackPrice]];
 }
 
 - (IBAction)previewButtonAction:(UIButton *)sender {

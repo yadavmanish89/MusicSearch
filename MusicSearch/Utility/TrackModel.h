@@ -12,8 +12,10 @@
 @property (nonatomic, strong) NSString *trackName;
 @property (nonatomic, strong) NSString *artistName;
 @property (nonatomic) double trackPrice;
-@property (nonatomic, strong) NSString *currency;
+@property (nonatomic) double collectionPrice;
 @property (nonatomic, strong) NSString *previewUrl;
+@property (nonatomic, strong) NSString *collectionViewUrl;
+@property (nonatomic, strong) NSString *trackViewUrl;
 
 -(id)initWithDictionary:(NSDictionary*)dictionary;
 @end

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TrackModel.h"
 
 @interface DetailViewController : UIViewController
-
+@property (nonatomic, strong) TrackModel *data;
 @end

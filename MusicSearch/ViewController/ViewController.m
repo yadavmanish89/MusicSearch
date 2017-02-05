@@ -9,10 +9,12 @@
 #import "ViewController.h"
 #import "TrackTableViewCell.h"
 #import "APIManager.h"
+#import "DetailViewController.h"
 
 #define MIN_CHAR 3
 #define TRACK_CELL_IDENTIFIER @"TrackCell"
 #define LAST_SEARCH_KEY @"lastSearch"
+#define DETAIL_VIEW @"DetailVC"
 @interface ViewController () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -25,7 +27,11 @@
     [super viewDidLoad];
     [self initLoader];
     [self loadLastSearch];
-    [self.navigationController.navigationBar setHidden:YES];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 -(void)initLoader{
@@ -134,8 +140,13 @@
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([[segue identifier]isEqualToString:DETAIL_VIEW]){
+        TrackTableViewCell *cell = sender;
+        NSIndexPath *selectedIndexPath = [self.tableView indexPathForCell:cell];
+        DetailViewController *detailVC = [segue destinationViewController];
+        detailVC.data = [self.dataSource objectAtIndex:selectedIndexPath.row];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
