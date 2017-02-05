@@ -66,6 +66,10 @@
     NSURL *url = [NSURL URLWithString:self.data.collectionViewUrl];
     [[UIApplication sharedApplication]openURL:url options:@{UIApplicationLaunchOptionsURLKey:@1} completionHandler:nil];
 }
+- (IBAction)playButtonAction:(UIButton *)sender {
+    NSURL *url = [NSURL URLWithString:self.data.previewUrl];
+    [[UIApplication sharedApplication]openURL:url options:@{UIApplicationLaunchOptionsURLKey:@1} completionHandler:nil];
+}
 
 /*
 #pragma mark - Navigation

@@ -246,6 +246,9 @@
                                     <constraint firstAttribute="width" secondItem="Kb5-gx-6hf" secondAttribute="height" multiplier="343:170" id="umK-Ls-fMK"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="playIcon"/>
+                                <connections>
+                                    <action selector="playButtonAction:" destination="jXp-hS-BlJ" eventType="touchUpInside" id="0dk-l3-ERM"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.14509803921568626" green="0.15686274509803921" blue="0.18431372549019609" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
