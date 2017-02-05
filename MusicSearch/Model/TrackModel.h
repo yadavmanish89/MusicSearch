@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSString *previewUrl;
 @property (nonatomic, strong) NSString *collectionViewUrl;
 @property (nonatomic, strong) NSString *trackViewUrl;
+@property (nonatomic, strong) NSString *artworkUrl;
 
 -(id)initWithDictionary:(NSDictionary*)dictionary;
 @end

@@ -145,7 +145,7 @@
         TrackTableViewCell *cell = sender;
         NSIndexPath *selectedIndexPath = [self.tableView indexPathForCell:cell];
         DetailViewController *detailVC = [segue destinationViewController];
-        detailVC.data = [self.dataSource objectAtIndex:selectedIndexPath.row];
+        detailVC.data = [self.dataSource objectAtIndex:selectedIndexPath.row];;
     }
 }
 

@@ -10,7 +10,7 @@
 @interface TrackTableViewCell()
 @property (strong, nonatomic) IBOutlet UILabel *trackLabel;
 @property (strong, nonatomic) IBOutlet UILabel *artistLabel;
-@property (strong, nonatomic) IBOutlet UILabel *priceLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *logoImageView;
 
 @end
 @implementation TrackTableViewCell
@@ -24,7 +24,13 @@
     _data = data;
     [self.trackLabel setText:data.trackName];
     [self.artistLabel setText:data.artistName];
-    [self.priceLabel setText:[NSString stringWithFormat:@"$%0.2f",data.trackPrice]];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:data.artworkUrl]];
+        UIImage *image = [UIImage imageWithData:imageData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.logoImageView setImage:image];
+        });
+    });
 }
 
 - (IBAction)previewButtonAction:(UIButton *)sender {

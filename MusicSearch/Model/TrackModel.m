@@ -19,7 +19,7 @@
         self.previewUrl = [Utility replaceNullStringWithNil:[dictionary objectForKey:@"previewUrl"]];
         self.collectionViewUrl = [Utility replaceNullStringWithNil:[dictionary objectForKey:@"collectionViewUrl"]];
         self.trackViewUrl = [Utility replaceNullStringWithNil:[dictionary objectForKey:@"trackViewUrl"]];
-        
+        self.artworkUrl = [Utility replaceNullStringWithNil:[dictionary objectForKey:@"artworkUrl60"]];
     }
     return self;
 }
